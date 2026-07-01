@@ -9,6 +9,10 @@ namespace: poc-wif
 fullnameOverride: poc-wif
 nameOverride: poc-wif
 
+service:
+  type: ClusterIP
+  port: 80
+
 resources:
   requests:
     cpu: 100m
