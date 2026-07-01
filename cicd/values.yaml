@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: us-central1-docker.pkg.dev/poc-worload-identity/poc-wif/poc-wif
+  repository: container-registry.br-se1.magalu.cloud/poc-wif/poc-wif
   pullPolicy: IfNotPresent
   tag: v0.0.1
 
@@ -24,6 +24,9 @@ ingress:
 
 httpRoute:
   enabled: false
+
+imagePullSecrets:
+  - magalu-registry-secret
 
 resources:
   requests:
