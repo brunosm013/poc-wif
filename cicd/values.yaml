@@ -13,6 +13,18 @@ service:
   type: ClusterIP
   port: 80
 
+workloadIdentity:
+  enabled: false
+
+serviceAccount:
+  create: false
+
+ingress:
+  enabled: false
+
+httpRoute:
+  enabled: false
+
 resources:
   requests:
     cpu: 100m
