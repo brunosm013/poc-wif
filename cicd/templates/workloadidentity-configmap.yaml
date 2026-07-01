@@ -1,0 +1,18 @@
+{{- if .Values.workloadIdentity.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "char-wif.fullname" . }}-workload-identity
+  namespace: {{ include "char-wif.namespace" . }}
+  labels:
+    {{- include "char-wif.labels" . | nindent 4 }}
+data:
+  {{ .Values.workloadIdentity.credentialsFileName }}: |
+{{ dict
+  "type" "external_account"
+  "audience" .Values.workloadIdentity.audience
+  "subject_token_type" "urn:ietf:params:oauth:token-type:jwt"
+  "token_url" "https://sts.googleapis.com/v1/token"
+  "credential_source" (dict "file" (printf "%s/%s" .Values.workloadIdentity.tokenMountPath .Values.workloadIdentity.tokenFileName))
+| toPrettyJson | nindent 4 }}
+{{- end }}

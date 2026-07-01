@@ -1,0 +1,24 @@
+replicaCount: 1
+
+image:
+  repository: us-central1-docker.pkg.dev/poc-worload-identity/poc-wif/poc-wif
+  pullPolicy: IfNotPresent
+  tag: v0.0.1
+
+namespace: poc-wif
+fullnameOverride: poc-wif
+nameOverride: poc-wif
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
