@@ -16,6 +16,16 @@ service:
 workloadIdentity:
   enabled: false
 
+envs:
+  - name: PROJECT_ID
+    value: "poc-worload-identity"
+  - name: GCP_LOCATION
+    value: "us-central1"
+  - name: GCS_BUCKET_NAME
+    value: "meu-bucket"
+  - name: GEMINI_MODEL
+    value: "gemini-2.5-flash"
+
 serviceAccount:
   create: false
 
