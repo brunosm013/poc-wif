@@ -28,7 +28,7 @@ envs:
 
 serviceAccount:
   create: true
-  serviceAccountName: serviceaccount-poc-wif
+  name: serviceaccount-poc-wif
   automount: false
 
 ingress:
