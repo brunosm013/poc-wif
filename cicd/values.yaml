@@ -17,7 +17,7 @@ workloadIdentity:
   enabled: false
 
 envs:
-  - name: PROJECT_ID
+  - name: GCP_PROJECT_ID
     value: "poc-worload-identity"
   - name: GCP_LOCATION
     value: "us-central1"
