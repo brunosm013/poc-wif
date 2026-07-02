@@ -27,7 +27,9 @@ envs:
     value: "gemini-2.5-flash"
 
 serviceAccount:
-  create: false
+  create: true
+  serviceAccountName: serviceaccount-poc-wif
+  automount: false
 
 ingress:
   enabled: false
