@@ -15,7 +15,7 @@ service:
 
 workloadIdentity:
   enabled: true
-  audience: "audience"
+  audience: "//iam.googleapis.com/projects/630729803660/locations/global/workloadIdentityPools/poc-workload-identity/providers/mgc-k8s-cluster"
   tokenMountPath: /var/run/secrets/tokens
   tokenFileName: token
   tokenExpirationSeconds: 3600
@@ -28,7 +28,7 @@ envs:
   - name: GCP_LOCATION
     value: "us-central1"
   - name: GCS_BUCKET_NAME
-    value: "meu-bucket"
+    value: "poc-wif"
   - name: GEMINI_MODEL
     value: "gemini-2.5-flash"
 
