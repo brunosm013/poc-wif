@@ -14,7 +14,13 @@ service:
   port: 80
 
 workloadIdentity:
-  enabled: false
+  enabled: true
+  audience: "audience"
+  tokenMountPath: /var/run/secrets/tokens
+  tokenFileName: token
+  tokenExpirationSeconds: 3600
+  credentialsMountPath: /var/run/secrets/google-cloud
+  credentialsFileName: credentials.json
 
 envs:
   - name: GCP_PROJECT_ID
