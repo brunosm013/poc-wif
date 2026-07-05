@@ -24,7 +24,7 @@ workloadIdentity:
 
 envs:
   - name: GCP_PROJECT_ID
-    value: "poc-worload-identity"
+    value: "poc-workload-identity-501203"
   - name: GCP_LOCATION
     value: "us-central1"
   - name: GCS_BUCKET_NAME
