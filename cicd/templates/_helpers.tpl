@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "char-wif.name" -}}
+{{- define "chart-wif.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "char-wif.fullname" -}}
+{{- define "chart-wif.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "char-wif.chart" -}}
+{{- define "chart-wif.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "char-wif.labels" -}}
-helm.sh/chart: {{ include "char-wif.chart" . }}
-{{ include "char-wif.selectorLabels" . }}
+{{- define "chart-wif.labels" -}}
+helm.sh/chart: {{ include "chart-wif.chart" . }}
+{{ include "chart-wif.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "char-wif.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "char-wif.name" . }}
+{{- define "chart-wif.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "chart-wif.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "char-wif.serviceAccountName" -}}
+{{- define "chart-wif.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "char-wif.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "chart-wif.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -64,6 +64,6 @@ Create the name of the service account to use
 {{/*
 Resolve the single namespace used by all namespaced resources.
 */}}
-{{- define "char-wif.namespace" -}}
+{{- define "chart-wif.namespace" -}}
 {{- required "values.namespace is required" .Values.namespace -}}
 {{- end }}

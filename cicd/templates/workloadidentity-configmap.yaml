@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "char-wif.fullname" . }}-workload-identity
-  namespace: {{ include "char-wif.namespace" . }}
+  name: {{ include "chart-wif.fullname" . }}-workload-identity
+  namespace: {{ include "chart-wif.namespace" . }}
   labels:
-    {{- include "char-wif.labels" . | nindent 4 }}
+    {{- include "chart-wif.labels" . | nindent 4 }}
 data:
   {{ .Values.workloadIdentity.credentialsFileName }}: |
 {{ dict

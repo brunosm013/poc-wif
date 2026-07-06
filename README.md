@@ -1,4 +1,4 @@
-# Helm Chart `char-wif`
+# Helm Chart `chart-wif`
 
 Template Helm para publicar uma aplicação no Kubernetes com suporte opcional a **Google Cloud Workload Identity Federation (WIF)**, sem uso de chaves estáticas de Service Account.
 
@@ -455,8 +455,8 @@ kubectl get hpa -n poc-wif
 - O token Kubernetes é temporário e montado apenas dentro do Pod.
 - Quando WIF está habilitado, o token padrão da ServiceAccount não é montado automaticamente.
 - A `audience` precisa estar alinhada com o Workload Identity Provider da Google Cloud.
-- O namespace é obrigatório neste chart, pois o helper `char-wif.namespace` usa `required`.
-- O nome interno dos helpers é `char-wif`. Se o chart for renomeado profundamente, revise também os `include "char-wif.*"` nos templates.
+- O namespace é obrigatório neste chart, pois o helper `chart-wif.namespace` usa `required`.
+- O nome interno dos helpers é `chart-wif`. Se o chart for renomeado profundamente, revise também os `include "chart-wif.*"` nos templates.
 
 ## Resumo
 

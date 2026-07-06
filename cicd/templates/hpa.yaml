@@ -2,15 +2,15 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "char-wif.fullname" . }}
-  namespace: {{ include "char-wif.namespace" . }}
+  name: {{ include "chart-wif.fullname" . }}
+  namespace: {{ include "chart-wif.namespace" . }}
   labels:
-    {{- include "char-wif.labels" . | nindent 4 }}
+    {{- include "chart-wif.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "char-wif.fullname" . }}
+    name: {{ include "chart-wif.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

@@ -4,5 +4,5 @@ kind: Namespace
 metadata:
   name: {{ .Values.namespace }}
   labels:
-    {{- include "char-wif.labels" . | nindent 4 }}
+    {{- include "chart-wif.labels" . | nindent 4 }}
 {{- end }}

@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "char-wif.fullname" . }}
-  namespace: {{ include "char-wif.namespace" . }}
+  name: {{ include "chart-wif.fullname" . }}
+  namespace: {{ include "chart-wif.namespace" . }}
   labels:
-    {{- include "char-wif.labels" . | nindent 4 }}
+    {{- include "chart-wif.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "char-wif.selectorLabels" . | nindent 6 }}
+      {{- include "chart-wif.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,7 +19,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "char-wif.labels" . | nindent 8 }}
+        {{- include "chart-wif.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -29,7 +29,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 
-      serviceAccountName: {{ include "char-wif.serviceAccountName" . }}
+      serviceAccountName: {{ include "chart-wif.serviceAccountName" . }}
 
       {{- if .Values.workloadIdentity.enabled }}
       automountServiceAccountToken: false
@@ -50,7 +50,7 @@ spec:
                   path: {{ .Values.workloadIdentity.tokenFileName | quote }}
         - name: workload-identity-credentials
           configMap:
-            name: {{ include "char-wif.fullname" . }}-workload-identity
+            name: {{ include "chart-wif.fullname" . }}-workload-identity
         {{- end }}
       {{- end }}
 

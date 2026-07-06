@@ -2,10 +2,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "char-wif.fullname" . }}
-  namespace: {{ include "char-wif.namespace" . }}
+  name: {{ include "chart-wif.fullname" . }}
+  namespace: {{ include "chart-wif.namespace" . }}
   labels:
-    {{- include "char-wif.labels" . | nindent 4 }}
+    {{- include "chart-wif.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -36,7 +36,7 @@ spec:
             {{- end }}
             backend:
               service:
-                name: {{ include "char-wif.fullname" $ }}
+                name: {{ include "chart-wif.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
