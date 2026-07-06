@@ -14,8 +14,7 @@ args:
     set -e
 
     echo "=== Autenticando via WIF ==="
-    gcloud auth login --cred-file="${GOOGLE_APPLICATION_CREDENTIALS}" --quiet >/dev/null
-    gcloud config set project "${GCP_PROJECT_ID}" --quiet >/dev/null
+    gcloud auth login --cred-file="${GOOGLE_APPLICATION_CREDENTIALS}" --quiet >/dev/null 2>&1
     echo "Autenticado com sucesso"
 
     echo "=== Validando Cloud Storage ==="
