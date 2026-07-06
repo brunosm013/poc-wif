@@ -19,7 +19,7 @@ args:
     echo "Autenticado com sucesso"
 
     echo "=== Validando Cloud Storage ==="
-    gcloud storage ls "gs://${BUCKET_NAME}"
+    gcloud storage ls "gs://${GCS_BUCKET_NAME}"
 
     echo "=== Validando access token ==="
     ACCESS_TOKEN="$(gcloud auth application-default print-access-token)"
