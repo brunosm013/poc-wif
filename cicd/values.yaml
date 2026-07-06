@@ -1,9 +1,45 @@
 replicaCount: 1
 
 image:
-  repository: container-registry.br-se1.magalu.cloud/poc-wif/poc-wif
+  repository: gcr.io/google.com/cloudsdktool/google-cloud-cli
+  tag: alpine
   pullPolicy: IfNotPresent
-  tag: v0.0.1
+
+command:
+  - /bin/sh
+  - -c
+
+args:
+  - |
+    set -e
+
+    apk add --no-cache curl jq >/dev/null
+
+    echo "=== Validando ADC/WIF ==="
+    ACCESS_TOKEN="$(gcloud auth application-default print-access-token)"
+    echo "Access token gerado com sucesso"
+
+    echo "=== Validando Cloud Storage ==="
+    gcloud storage ls "gs://${GCS_BUCKET_NAME}"
+
+    echo "=== Validando Gemini via Vertex AI ==="
+    curl -s \
+      -X POST \
+      -H "Authorization: Bearer ${ACCESS_TOKEN}" \
+      -H "Content-Type: application/json" \
+      "https://${GCP_LOCATION}-aiplatform.googleapis.com/v1/projects/${GCP_PROJECT_ID}/locations/${GCP_LOCATION}/publishers/google/models/${GEMINI_MODEL}:generateContent" \
+      -d '{
+        "contents": [
+          {
+            "role": "user",
+            "parts": [
+              {
+                "text": "Responda apenas: OK"
+              }
+            ]
+          }
+        ]
+      }' | jq .
 
 namespace: poc-wif
 fullnameOverride: poc-wif
