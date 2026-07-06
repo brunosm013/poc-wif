@@ -46,6 +46,9 @@ args:
           }
         ]
       }' | jq .
+    
+    echo "=== Teste finalizado. Mantendo container vivo para inspeção ==="
+    sleep infinity
 
 namespace: poc-wif
 fullnameOverride: poc-wif
