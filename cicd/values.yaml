@@ -13,22 +13,21 @@ args:
   - |
     set -e
 
-    apk add --no-cache curl jq >/dev/null
-
-    echo "=== Autenticando gcloud CLI via WIF ==="
-    gcloud auth login --cred-file="${GOOGLE_APPLICATION_CREDENTIALS}"
-
-    echo "=== Conta ativa ==="
-    gcloud auth list
+    echo "=== Autenticando via WIF ==="
+    gcloud auth login --cred-file="${GOOGLE_APPLICATION_CREDENTIALS}" --quiet >/dev/null
+    gcloud config set project "${GCP_PROJECT_ID}" --quiet >/dev/null
+    echo "Autenticado com sucesso"
 
     echo "=== Validando Cloud Storage ==="
-    gcloud storage ls "gs://${GCS_BUCKET_NAME}"
+    gcloud storage ls "gs://${BUCKET_NAME}"
 
-    echo "=== Validando access token via ADC ==="
+    echo "=== Validando access token ==="
     ACCESS_TOKEN="$(gcloud auth application-default print-access-token)"
     echo "Access token gerado com sucesso"
 
-    echo "=== Validando Gemini via Vertex AI ==="
+    echo "=== Validando Gemini ==="
+    apk add --no-cache curl jq >/dev/null
+
     curl -s \
       -X POST \
       -H "Authorization: Bearer ${ACCESS_TOKEN}" \
@@ -45,8 +44,8 @@ args:
             ]
           }
         ]
-      }' | jq .
-    
+      }' | jq -r '.candidates[0].content.parts[0].text'
+
     echo "=== Teste finalizado. Mantendo container vivo para inspeção ==="
     sleep infinity
 
