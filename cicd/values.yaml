@@ -88,9 +88,6 @@ ingress:
 httpRoute:
   enabled: false
 
-imagePullSecrets:
-  - name: magalu-registry-secret
-
 resources:
   requests:
     cpu: 100m
