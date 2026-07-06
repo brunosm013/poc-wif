@@ -15,12 +15,18 @@ args:
 
     apk add --no-cache curl jq >/dev/null
 
-    echo "=== Validando ADC/WIF ==="
-    ACCESS_TOKEN="$(gcloud auth application-default print-access-token)"
-    echo "Access token gerado com sucesso"
+    echo "=== Autenticando gcloud CLI via WIF ==="
+    gcloud auth login --cred-file="${GOOGLE_APPLICATION_CREDENTIALS}"
+
+    echo "=== Conta ativa ==="
+    gcloud auth list
 
     echo "=== Validando Cloud Storage ==="
     gcloud storage ls "gs://${GCS_BUCKET_NAME}"
+
+    echo "=== Validando access token via ADC ==="
+    ACCESS_TOKEN="$(gcloud auth application-default print-access-token)"
+    echo "Access token gerado com sucesso"
 
     echo "=== Validando Gemini via Vertex AI ==="
     curl -s \
